@@ -1,0 +1,5 @@
+pulls SCM ChangeSets information from Jenkins Build and push it to rally defect or story
+
+picks up Task details [status, actual hrs, todo hrs etc] from scm comments (if provided)  and updates rally task details accordingly
+
+This plugin saves us from writing check-in hooks to svn, cvs etc which is difficult if organisation uses more than one config management tool

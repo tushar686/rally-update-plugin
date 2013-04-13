@@ -1,0 +1,47 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <!--
+    This jelly script is used for per-project configuration.
+
+    See global.jelly for a general discussion about jelly script.
+  -->
+
+  <f:entry title="Rally User Name" field="userName"><f:textbox /></f:entry>
+  <f:entry title="Rally Password" field="password"><f:password /></f:entry>
+  <f:entry title="Rally Workspace" field="workspace"><f:textbox /></f:entry>
+  <f:entry title="Rally Project" field="project"><f:textbox /> </f:entry>
+  <f:entry title="SCM URI" field="scmuri"><f:textbox /> </f:entry>
+  <f:entry title="SCM Repository Name" field="scmRepoName"><f:textbox /> </f:entry>
+  
+  <j:if test="${instance.changesSince eq 'changesSinceLastBuild' or empty instance.changesSince}">
+	  <f:entry title="Update changes...">
+		    <select name="changesSince" field="changesSince">
+		        <option value="changesSinceLastBuild" selected='true'>since last build</option>
+		        <option value="changesSinceLastSuccessfulBuild">since last successful build</option>
+		        <option value="changesBetDates">between these dates</option>
+		    </select>
+	  </f:entry>
+  </j:if>
+  <j:if test="${instance.changesSince eq 'changesSinceLastSuccessfulBuild'}">
+	  <f:entry title="Update changes...">
+		    <select name="changesSince" field="changesSince">
+		        <option value="changesSinceLastBuild">since last build</option>
+		        <option value="changesSinceLastSuccessfulBuild" selected='true'>since last successful build</option>
+		        <option value="changesBetDates">between these dates</option>
+		    </select>
+	  </f:entry>
+  </j:if>
+  <j:if test="${instance.changesSince eq 'changesBetDates'}">
+	  <f:entry title="Update changes...">
+		    <select name="changesSince" field="changesSince">
+		        <option value="changesSinceLastBuild">since last build</option>
+		        <option value="changesSinceLastSuccessfulBuild">since last successful build</option>
+		        <option value="changesBetDates" selected='true'>between these dates</option>
+		    </select>
+	  </f:entry>
+  </j:if>
+  
+  <f:entry title="Changes Start Date [yyyy-MM-dd:HH:mm:ss]" field="startDate"><f:textbox /> </f:entry>
+  <f:entry title="Changes End Date [yyyy-MM-dd:HH:mm:ss]" field="endDate"><f:textbox /> </f:entry>
+    
+  <f:entry title="Turn on debug level?" field="debugOn"><f:checkbox/></f:entry>
+</j:jelly>
